@@ -39,7 +39,7 @@ internal class CodingHabitManager
             
             case MenuSelections.data:
                 DataViewer.DisplayHeader("Viewing All Data");
-                DataViewer.displayListAsTableLive<CodingSession>(CodingSession.headers, this.databaseManager.GetAllData());
+                DataViewer.DisplayListAsTableLive<CodingSession>(CodingSession.headers, this.databaseManager.GetAllData());
                 
                 Utilities.PressToContinue();
                 break;
@@ -47,14 +47,14 @@ internal class CodingHabitManager
             case MenuSelections.reports:
                 DataViewer.DisplayHeader("Viewing Reports");
                 
-                if (this.reports is null) 
+                if (this.reports == null) 
                     this.reports = new Reports(this.databaseManager);
                 
                 this.reports.HandleReportSelection();
                 break;
 
             case MenuSelections.goals:
-                if(this.reports is null) 
+                if(this.reports == null) 
                     this.reports = new Reports(this.databaseManager);
                 
                 DataViewer.DisplayHeader("Coding Goal");
@@ -98,7 +98,7 @@ internal class CodingHabitManager
         }
 
         DataViewer.DisplayHeader("Current Data", "left");
-        DataViewer.displayListAsTable(CodingSession.headers, this.databaseManager.GetAllData());
+        DataViewer.DisplayListAsTable(CodingSession.headers, this.databaseManager.GetAllData());
 
         this.AssignValidID(ref id);
         this.databaseManager.Delete(id: ref id);
@@ -114,7 +114,7 @@ internal class CodingHabitManager
         }
 
         DataViewer.DisplayHeader("Current Data", "left");
-        DataViewer.displayListAsTable(CodingSession.headers, this.databaseManager.GetAllData());
+        DataViewer.DisplayListAsTable(CodingSession.headers, this.databaseManager.GetAllData());
 
         this.AssignValidID(ref id);
 

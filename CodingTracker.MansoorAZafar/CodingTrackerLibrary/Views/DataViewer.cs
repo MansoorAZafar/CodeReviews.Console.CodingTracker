@@ -3,7 +3,7 @@ namespace CodingTrackerLibrary.Views;
 
 internal static class DataViewer
 {
-    public static void displayListAsTableLive<T>(string[] headers, List<T> data)
+    public static void DisplayListAsTableLive<T>(string[] headers, List<T> data)
     {
         var table = new Table().Centered();
         AnsiConsole.Live(table)
@@ -34,7 +34,7 @@ internal static class DataViewer
         System.Console.WriteLine();
     }
 
-    public static void displayListAsTable<T>(string[] headers, List<T> data)
+    public static void DisplayListAsTable<T>(string[] headers, List<T> data)
     {
         var table = new Table();
         

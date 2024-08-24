@@ -2,7 +2,6 @@ using CodingTrackerLibrary.Controllers.Database;
 using CodingTrackerLibrary.Models;
 using CodingTrackerLibrary.Views;
 using Spectre.Console;
-using System.Text;
 
 namespace CodingTrackerLibrary.Controllers;
 internal class Reports
@@ -90,7 +89,7 @@ internal class Reports
         System.Console.Clear();
 
         DataViewer.DisplayHeader($"Displaying Dates from {startDate:yyyy-MM-dd} till now");
-        DataViewer.displayListAsTable<CodingSession>(CodingSession.headers, this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
+        DataViewer.DisplayListAsTable<CodingSession>(CodingSession.headers, this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
 
         Utilities.PressToContinue();
     }
@@ -111,7 +110,7 @@ internal class Reports
         System.Console.Clear();
         
         DataViewer.DisplayHeader($"Displaying Dates from {startDate:yyyy-MM-dd-HH} till now\n");
-        DataViewer.displayListAsTable<CodingSession>(CodingSession.headers,this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
+        DataViewer.DisplayListAsTable<CodingSession>(CodingSession.headers,this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
         
         Utilities.PressToContinue();
     }
@@ -147,7 +146,7 @@ internal class Reports
         System.Console.Clear();
         
         DataViewer.DisplayHeader($"Displaying Dates from {startDate:yyyy-MM-dd-HH} till {endDate:yyyy-MM-dd-HH}");
-        DataViewer.displayListAsTable<CodingSession>(CodingSession.headers, this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
+        DataViewer.DisplayListAsTable<CodingSession>(CodingSession.headers, this.databaseManager.GetDataFromDate(start: ref startDate, end: ref endDate));
         
         Utilities.PressToContinue();
     }
@@ -181,7 +180,7 @@ internal class Reports
         System.Console.Clear();
 
         DataViewer.DisplayHeader($"Filtered Results by {sortingBy} Ordered By {period}\n");
-        DataViewer.displayListAsTable<CodingSession>(CodingSession.headers, 
+        DataViewer.DisplayListAsTable<CodingSession>(CodingSession.headers, 
                                                      this.databaseManager.GetDataSortedBy(sortingBy, period));
         Utilities.PressToContinue();
     }

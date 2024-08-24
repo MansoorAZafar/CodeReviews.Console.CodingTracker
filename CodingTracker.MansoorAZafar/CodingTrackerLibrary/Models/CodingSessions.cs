@@ -3,43 +3,43 @@ namespace CodingTrackerLibrary.Models;
 internal class CodingSession
 {
     public static string[] headers = { "id", "startDate", "endDate", "duration", "units" };
-    public int? id { get; set; }
-    public string? startDate { get; set; }
-    public string? endDate { get; set; }
-    public float? duration { get; set; }
-    public string? units { get; set; } 
+    public int? Id { get; set; }
+    public string? StartDate { get; set; }
+    public string? EndDate { get; set; }
+    public float? Duration { get; set; }
+    public string? Units { get; set; } 
 
     public CodingSession(int id, string startDate, string endDate, float duration)
     {
-        this.id = id; 
-        this.startDate = startDate; 
-        this.endDate = endDate;
-        this.duration = duration;
+        this.Id = id; 
+        this.StartDate = startDate; 
+        this.EndDate = endDate;
+        this.Duration = duration;
     }
 
     public CodingSession(int id, string startDate, string endDate, float duration, string units)
     {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.duration = duration;
-        this.units = units;
+        this.Id = id;
+        this.StartDate = startDate;
+        this.EndDate = endDate;
+        this.Duration = duration;
+        this.Units = units;
     }
 
     public CodingSession(string startDate, string endDate, float duration)
     {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.duration = duration;
+        this.StartDate = startDate;
+        this.EndDate = endDate;
+        this.Duration = duration;
     }
 
     public CodingSession(string startDate)
     {
-        this.startDate = startDate;
+        this.StartDate = startDate;
     }
 
     public CodingSession(int id)
     {
-        this.id = id;
+        this.Id = id;
     }
 }
