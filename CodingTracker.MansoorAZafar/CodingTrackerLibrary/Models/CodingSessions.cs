@@ -2,7 +2,7 @@ namespace CodingTrackerLibrary.Models;
 
 internal class CodingSession
 {
-    public static string[] headers = { "id", "startDate", "endDate", "duration", "units" };
+    public static string[] headers = { "Id", "StartDate", "EndDate", "Duration", "Units" };
     public int? Id { get; set; }
     public string? StartDate { get; set; }
     public string? EndDate { get; set; }

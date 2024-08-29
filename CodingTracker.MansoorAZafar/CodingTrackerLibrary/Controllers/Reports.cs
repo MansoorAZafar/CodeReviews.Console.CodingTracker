@@ -101,7 +101,7 @@ internal class Reports
         Utilities.GetValidDateInyyMMddFormat
         (
             input: ref startDate,
-            message: "Please enter the Starting Date\n> ",
+            message: "Please enter the Starting Date and Hour (yyyy-MM-dd-HH)\n> ",
             errorMessage: "Invalid Answer\nPlease Enter a valid Date\n> "
         );
 
@@ -131,16 +131,16 @@ internal class Reports
         Utilities.GetValidDateInyyMMddFormat
         (
             input: ref startDate,
-            message: "Please enter the Starting Date\n> ",
-            errorMessage: "Invalid Answer\nPlease Enter a valid Date\n> "
+            message: "Please enter the Starting Date and Hour (yyyy-MM-dd-HH)\n> ",
+            errorMessage: "Invalid Answer\nPlease Enter a valid Date (yyyy-MM-dd-HH)\n> "
         );
 
         DateTime endDate = DateTime.Now;
         Utilities.GetValidDateInyyMMddFormat
         (
             input: ref endDate,
-            message: "Please enter the Ending Date\n> ",
-            errorMessage: "Invalid Answer\nPlease Enter a valid Date\n> "
+            message: "Please enter the Ending Date and Hour (yyyy-MM-dd-HH)\n> ",
+            errorMessage: "Invalid Answer\nPlease Enter a valid Date (yyyy-MM-dd-HH)\n> "
         );
 
         System.Console.Clear();

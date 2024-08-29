@@ -16,11 +16,11 @@ internal class DatabaseManager
         var tableCommand = connection.CreateCommand();
         tableCommand.CommandText =
             @"CREATE TABLE IF NOT EXISTS CodingTracker (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        startDate TEXT,
-                        endDate TEXT,
-                        duration FLOAT,
-                        units TEXT DEFAULT 'hours'
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        StartDate TEXT,
+                        EndDate TEXT,
+                        Duration FLOAT,
+                        Units TEXT DEFAULT 'hours'
                     )";
         tableCommand.ExecuteNonQuery();
 
@@ -46,10 +46,8 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
 
-        var sql = "INSERT INTO CodingTracker (startDate, endDate, duration) VALUES (@startDate, @endDate, @duration)";
+        var sql = "INSERT INTO CodingTracker (StartDate, EndDate, Duration) VALUES (@StartDate, @EndDate, @Duration)";
         var rowsAffected = connection.Execute(sql, dummyCodingHabits);
-
-        Console.WriteLine($"{rowsAffected} row(s) inserted.");
 
         connection.Close();
     }
@@ -92,7 +90,7 @@ internal class DatabaseManager
 
         connection.Open();
 
-        var sql = "SELECT COUNT(*) FROM CodingTracker WHERE id=@id";
+        var sql = "SELECT COUNT(*) FROM CodingTracker WHERE Id=@Id";
         CodingSession cs = new CodingSession(id);
 
         queryLength = connection.ExecuteScalar<int>(sql, cs);
@@ -107,17 +105,17 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
         var sql = @"UPDATE CodingTracker
-                      SET startDate = @startDate,
-                          endDate = @endDate,
-                          duration = @duration
+                      SET StartDate = @StartDate,
+                          EndDate = @EndDate,
+                          Duration = @Duration
                       WHERE
-                          id = @id";
+                          Id = @Id";
 
         CodingSession cs = 
             new CodingSession(ID, 
                               startDate.ToString("yyyy-MM-dd"), 
                               endDate.ToString("yyyy-MM-dd"), 
-                              (float)duration.Days);
+                              (float)duration.TotalHours);
         
         connection.Execute(sql, cs);   
         connection.Close();
@@ -128,7 +126,7 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
 
-        var sql = "DELETE FROM CodingTracker WHERE id=@id";
+        var sql = "DELETE FROM CodingTracker WHERE Id=@Id";
         CodingSession cs = new(id);
 
         connection.Execute(sql, cs);
@@ -141,8 +139,8 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
         
-        var sql = @"INSERT INTO CodingTracker (startDate, endDate, duration)
-                       VALUES(@startDate, @endDate, @duration)";
+        var sql = @"INSERT INTO CodingTracker (StartDate, EndDate, Duration)
+                       VALUES(@StartDate, @EndDate, @Duration)";
 
         CodingSession cs = 
             new CodingSession(startDate.ToString("yyyy-MM-dd"), 
@@ -163,7 +161,7 @@ internal class DatabaseManager
 
         var sql = @"SELECT * 
                    FROM CodingTracker 
-                   WHERE DATE(startDate) BETWEEN DATE(@startDate) AND DATE(@endDate)";
+                   WHERE DATE(StartDate) BETWEEN DATE(@StartDate) AND DATE(@EndDate)";
         
         CodingSession finder = new(start.ToString("yyyy-MM-dd"), end.ToString("yyyy-MM-dd"), 0);
         
@@ -185,7 +183,7 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
 
-        total = connection.ExecuteScalar<int>("SELECT SUM(duration) FROM CodingTracker");
+        total = connection.ExecuteScalar<int>("SELECT SUM(Duration) FROM CodingTracker");
 
         connection.Close();
         return total; 
@@ -197,9 +195,9 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
 
-        var sql = @"SELECT SUM(duration) 
+        var sql = @"SELECT SUM(Duration) 
                 FROM CodingTracker
-                WHERE strftime('%m', startDate) = strftime('%m', @startDate)";
+                WHERE strftime('%m', StartDate) = strftime('%m', @StartDate)";
 
         CodingSession cs = new(new DateTime(0001, month, 1).ToString("yyyy-MM-dd"));
         total = connection.ExecuteScalar<int>(sql, cs);
@@ -217,7 +215,7 @@ internal class DatabaseManager
 
         var sql = @$"SELECT *
                     FROM CodingTracker
-                    ORDER BY duration {sortBy}";
+                    ORDER BY Duration {sortBy}";
 
         using var reader = connection.ExecuteReader(sql);
         while (reader.Read())
@@ -237,7 +235,7 @@ internal class DatabaseManager
         using var connection = new SqliteConnection(this.connectionString);
         connection.Open();
 
-        var sql = @$"SELECT SUM(duration) FROM CodingTracker WHERE DATE(startDate) = @startDate";
+        var sql = @$"SELECT SUM(duration) FROM CodingTracker WHERE DATE(StartDate) = @StartDate";
         CodingSession cs = new CodingSession(startDate: startingTime.ToString("yyyy-MM-dd"));
 
         totalDuration = connection.ExecuteScalar<int>(sql, cs);
