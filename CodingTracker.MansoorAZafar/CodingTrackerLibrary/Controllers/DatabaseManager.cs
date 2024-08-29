@@ -47,7 +47,7 @@ internal class DatabaseManager
         connection.Open();
 
         var sql = "INSERT INTO CodingTracker (StartDate, EndDate, Duration) VALUES (@StartDate, @EndDate, @Duration)";
-        var rowsAffected = connection.Execute(sql, dummyCodingHabits);
+        connection.Execute(sql, dummyCodingHabits);
 
         connection.Close();
     }
